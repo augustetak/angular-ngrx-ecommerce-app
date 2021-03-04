@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../../../services/product.service";
+import {Store} from "@ngrx/store";
+import {
+  GetAllProductsAction,
+  GetSelectedProductsAction
+} from "../../../ngrx/products.actions";
 
 @Component({
   selector: 'app-products-nav-bar',
@@ -8,16 +12,16 @@ import {ProductService} from "../../../services/product.service";
 })
 export class ProductsNavBarComponent implements OnInit {
 
-  constructor( private productsService: ProductService ) { }
+  constructor( private store: Store<any> ) { }
 
   ngOnInit(): void {
   }
 
   onGetAllProducts() {
-     this.productsService.getProducts();
+     this.store.dispatch( new  GetAllProductsAction({}));
   }
 
   onGetSelectedProducts() {
-    this.productsService.getSelectedProducts();
+      this.store.dispatch( new GetSelectedProductsAction({}));
   }
 }

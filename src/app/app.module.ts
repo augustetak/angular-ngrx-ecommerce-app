@@ -9,19 +9,25 @@ import { ProductsNavBarComponent } from './components/products/products-nav-bar/
 import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import { productsReducer} from "./ngrx/products.reducers";
+import {ProductsEffects} from "./ngrx/products.effects";
+import { ProductsListComponent } from './components/products/products-list/products-list.component';
+import { ProductItemComponent } from './components/products/products-list/product-item/product-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
-    ProductsNavBarComponent
+    ProductsNavBarComponent,
+    ProductsListComponent,
+    ProductItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({catalogState: productsReducer}),
+    EffectsModule.forRoot([ProductsEffects]),
     StoreDevtoolsModule.instrument()
   ],
   providers: [],
